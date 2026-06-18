@@ -54,6 +54,8 @@ $routes->get(
     ['filter' => 'auth']
 );
 
+//Route Untuk Departments
+
 $routes->get(
     '/departments',
     'DepartmentController::index',
@@ -69,5 +71,23 @@ $routes->get(
 $routes->post(
     '/departments/store',
     'DepartmentController::store',
+    ['filter' => 'auth']
+);
+
+$routes->get(
+    '/departments/edit/(:num)',
+    'DepartmentController::edit/$1',
+    ['filter' => 'auth']
+);
+
+$routes->post(
+    'departments/update/(:num)',
+    'DepartmentController::update/$1',
+    ['filter' => 'auth']
+);
+
+$routes->get(
+    '/departments/delete/(:num)',
+    'DepartmentController::delete/$1',
     ['filter' => 'auth']
 );

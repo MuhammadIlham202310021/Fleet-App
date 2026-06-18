@@ -36,6 +36,22 @@ class DepartmentController extends BaseController
 
     public function store()
     {
+        $rules = [
+            'department_name' =>
+                'required|min_length[3]'
+        ];
+
+        if (!$this->validate($rules))
+        {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(
+                    'errors',
+                    $this->validator->getErrors()
+                );
+        }
+
         $departmentModel =
             new DepartmentModel();
 
@@ -50,10 +66,59 @@ class DepartmentController extends BaseController
 
         session()->setFlashdata(
             'success',
-            'Department Berhasul ditambahkan'
+            'Department Berhasil ditambahkan'
         );
 
         return redirect()
             ->to('/departments');
+    }
+
+    public function edit($id)
+    {
+        $departmentModel = 
+            new DepartmentModel();
+        $data = [
+            'department' =>
+                $departmentModel->find($id)
+        ];
+
+        return view(
+            'departments/edit',
+            $data
+        );
+    }
+
+    public function update($id)
+    {
+        $departmentModel =
+            new DepartmentModel();
+        
+        $departmentModel->update($id, [
+            'department_name' =>
+                $this->request
+                    ->getPost('department_name')
+        ]);
+
+        session()->setFlashdata(
+            'success',
+            'Department berhasil diupdate'
+        );
+
+        return redirect()
+        ->to('/departments');
+    }
+
+    public function delete($id)
+    {
+        $departmentModel = new DepartmentModel();
+
+        $departmentModel->delete($id);
+
+        session()->setFlashdata(
+            'success',
+            'Department berhasil dihapus'
+        );
+
+        return redirect()->to('/departments');
     }
 }

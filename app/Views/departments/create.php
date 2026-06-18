@@ -6,6 +6,22 @@
 
     <h3>Tambah Department</h3>
 
+    <?php if(session()->get('errors')): ?>
+    
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach(
+                session()->get('errors')
+                as $error 
+            ): ?>
+
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <?php endif; ?>
+
     <form
         action="/departments/store"
         method="post">

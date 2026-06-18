@@ -18,6 +18,14 @@
 
     </div>
 
+    <?php if(session()->getFlashdata('success')): ?>
+
+    <div class="alert alert-success">
+        <?= session()->getFlashdata('success') ?>
+    </div>
+
+    <?php endif; ?>
+
     <table class="table table-bordered">
 
         <thead>
@@ -26,6 +34,7 @@
 
                 <th>ID</th>
                 <th>Department</th>
+                <th>Action</th>
 
             </tr>
 
@@ -43,6 +52,20 @@
 
                 <td>
                     <?= $department['department_name'] ?>
+                </td>
+
+                <td>
+                    <a 
+                        href="/departments/edit/<?= $department['id'] ?>"
+                        class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+                    <a 
+                        href="/departments/delete/<?= $department['id'] ?>"
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('Yakin ingin menghapus department ini kamu ?')">
+                        Delete
+                    </a>
                 </td>
 
             </tr>

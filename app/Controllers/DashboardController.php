@@ -27,8 +27,6 @@ class DashboardController extends BaseController
             ->countAllresults()
         ];
 
-        
-
         // Untuk test
         // dd($userModel->findAll());
 

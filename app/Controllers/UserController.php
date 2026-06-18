@@ -22,7 +22,7 @@ class UserController extends BaseController
                 ->paginate(5);
         } else {
             $users = $userModel
-            ->getUserWithDepeartment()    
+            ->getUsersWithDepartment()    
             ->paginate(5);
         }
 
@@ -70,6 +70,13 @@ class UserController extends BaseController
                     'required' => 'Password wajib diisi',
                     'min_length' => 'Password minimal 6 karakter'
                 ]
+            ],
+
+            'department_id' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Department wajib diisi'
+                ]
             ]
         ]);
 
@@ -115,7 +122,7 @@ class UserController extends BaseController
 
         $data = [
             'user' => $userModel->find($id),
-            'deparments' =>
+            'departments' =>
                 $departmentModel->findAll()
         ];
 
