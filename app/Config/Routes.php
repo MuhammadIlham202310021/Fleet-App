@@ -1,7 +1,7 @@
-<!-- File ini berfungsi sebagai penghubung antara URL yang diakses user dengan Controller dan Method yang akan dijalankan. -->
-
-
 <?php
+
+// <!-- File ini berfungsi sebagai penghubung antara URL yang diakses user dengan Controller dan Method yang akan dijalankan. -->
+
 
 use CodeIgniter\Router\RouteCollection;
 
@@ -140,3 +140,49 @@ $routes->get(
     'DepartmentController::delete/$1',
     ['filter' => 'auth']
 );
+
+// Routes untuk Student
+
+$routes->get(
+    '/students',
+    'StudentController::index',
+    ['filter' => 'auth']
+);
+
+$routes->get(
+    '/students/create',
+    'StudentController::create',
+    ['filter' => 'auth']
+);
+
+$routes->post(
+    '/students/store',
+    'StudentController::store',
+    ['filter' => 'auth']
+);
+
+$routes->get(
+    '/students/edit/(:num)',
+    'StudentController::edit/$1',
+    ['filter' => 'auth']
+);
+
+$routes->post(
+    'students/update/(:num)',
+    'StudentController::update/$1',
+    ['filter' => 'auth']
+);
+
+$routes->get(
+    'students/delete/(:num)',
+    'StudentController::delete/$1',
+    ['filter' => 'auth']
+);
+
+$routes->group('api', function ($routes) {
+    $routes->get('students', 'Api\StudentController::index');
+    $routes->get('students/(:num)', 'Api\StudentController::show/$1');
+    $routes->post('students', 'Api\StudentController::create');
+    $routes->put('students/(:num)', 'Api\StudentController::update/$1');
+    $routes->delete('students/(:num)', 'Api\StudentController::delete/$1');
+});

@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <h3>Edit User</h3>
 
-    <form action="/users/update/<?= $user['id'] ?>"
+    <form action="/users/update/<?= $user['id'] ?>">
         method="post">
 
         <div class="mb-3">
